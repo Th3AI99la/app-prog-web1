@@ -1,0 +1,2 @@
+copilar = mvn compile
+iniciar = mvn spring-boot:run
