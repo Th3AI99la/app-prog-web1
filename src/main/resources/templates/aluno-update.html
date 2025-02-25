@@ -1,34 +1,53 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Update de Aluno</title>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atualização de Aluno</title>
+    <link rel="stylesheet" href="../styles/styles.css"> <!-- Referência para o CSS externo -->
+    <link rel="stylesheet" href="../styles/bulma.css"> <!-- Referência para o Bulma CSS -->
+</head>
 
-    <body>
+<body>
+    <div class="container">
+        <section class="section">
+            <h1 class="title has-text-centered">Atualização de Aluno</h1>
+            
+            <!-- Formulário de atualização -->
+            <form action="/alunos" method="post">
+                <div class="field">
+                    <label for="nome" class="label">Nome:</label>
+                    <div class="control">
+                        <input type="text" id="nome" name="nome" class="input" required>
+                    </div>
+                </div>
 
-        <h1>Update de Aluno</h1>
-        <form action="/alunos" method="post">
+                <div class="field">
+                    <label for="matricula" class="label">Matrícula:</label>
+                    <div class="control">
+                        <input type="text" id="matricula" name="matricula" class="input" required>
+                    </div>
+                </div>
 
-            <label for="nome">Nome:</label>
-            <input type="text" id="nome" name="nome" required>
-            <br>
+                <div class="field">
+                    <label for="email" class="label">Email:</label>
+                    <div class="control">
+                        <input type="email" id="email" name="email" class="input" required>
+                    </div>
+                </div>
 
-            <label for="matricula">Matrícula:</label>
-            <input type="text" id="matricula" name="matricula" required>
-            <br>
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-            <br>
-
-            <button type="submit">Salvar</button>
-
-            <br>
-            <a href="./alunos.html">Voltar</a>
-        </form>
-    </body>
+                <div class="field is-grouped is-grouped-centered">
+                    <div class="control">
+                        <button type="submit" class="button is-primary">Salvar</button>
+                    </div>
+                    <div class="control">
+                        <a href="./alunos.html" class="button is-link">Voltar</a>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </div>
+</body>
 
 </html>

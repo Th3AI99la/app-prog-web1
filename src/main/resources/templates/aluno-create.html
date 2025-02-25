@@ -5,32 +5,57 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>UEG - Desenvolvimento Web 2025: Aluno</title>
+        <title>Cadastro de Aluno</title>
+        <link rel="stylesheet" href="../styles/bulma.css">
+        <!-- Referência para o Bulma CSS -->
+        <link rel="stylesheet" href="../styles/styles.css">
+        <!-- Referência para o CSS externo -->
     </head>
 
     <body>
+        <div class="container">
+            <section class="section">
+                <h1 class="title has-text-centered">Cadastro de Aluno</h1>
 
-        <h1>Cadastro de Aluno</h1>
-        <form action="/alunos/cadastrar" method="post">
+                <!-- Formulário de cadastro -->
+                <form action="/alunos/cadastrar" method="post">
+                    <div class="field">
+                        <label class="label" for="nome">Nome:</label>
+                        <div class="control">
+                            <input class="input" type="text" id="nome"
+                                name="nome" required>
+                        </div>
+                    </div>
 
-            <label for="nome">Nome:</label>
-            <input type="text" id="nome" name="nome" required>
-            <br>
+                    <div class="field">
+                        <label class="label" for="matricula">Matrícula:</label>
+                        <div class="control">
+                            <input class="input" type="text" id="matricula"
+                                name="matricula" required>
+                        </div>
+                    </div>
 
-            <label for="matricula">Matrícula:</label>
-            <input type="text" id="matricula" name="matricula" required>
-            <br>
+                    <div class="field">
+                        <label class="label" for="email">Email:</label>
+                        <div class="control">
+                            <input class="input" type="email" id="email"
+                                name="email" required>
+                        </div>
+                    </div>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-            <br>
-
-            <button type="submit">Salvar</button>
-
-        </form>
-        <br>
-        <a href="./index.html">Voltar</a>
-
+                    <div class="field is-grouped is-grouped-centered">
+                        <div class="control">
+                            <button type="submit"
+                                class="button is-primary">Salvar</button>
+                        </div>
+                        <div class="control">
+                            <a href="./index.html"
+                                class="button is-link">Voltar</a>
+                        </div>
+                    </div>
+                </form>
+            </section>
+        </div>
     </body>
 
 </html>

@@ -1,49 +1,39 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Bem Vindo</title>
-        <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #001aff;
-        }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bem Vindo</title>
+    <link rel="stylesheet" href="../styles/styles.css"> <!-- Referência para o CSS externo -->
+    <link rel="stylesheet" href="../styles/bulma.css"> <!-- Referência para o Bulma CSS -->
+</head>
 
-        .container {
-            text-align: center;
-            background: rgb(255, 255, 255);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgb(255, 255, 255);
-        }
-
-        h1 {
-            color: #000000;
-        }
-    </style>
-    </head>
-
-    <body>
-        <div class="container">
-            <h1>Inicio</h1>
-            <p>Bem vindo ao curso de Desenvolvimento Web </p>
-
-            <h2>
-                <a href="./alunos.html">Lista de Alunos</a>
-            </h2>
-
-            <h2>
-                <a href="/aluno-create.html">Cadastrar Aluno</a>
-            </h2>
-
+<body>
+    <section class="hero is-medium">
+        <div class="hero-body has-text-centered">
+            <h1 class="title">
+                Bem-vindo ao Curso de Desenvolvimento Web
+            </h1>
+            <p class="subtitle">
+                Transformando ideias em soluções práticas
+            </p>
         </div>
-    </body>
+    </section>
+
+    <div class="container">
+        <div class="section">
+            <h2 class="title">Opções:</h2>
+            <div class="columns">
+                <div class="column is-half">
+                    <a href="./alunos.html" class="button is-large is-fullwidth is-primary">Lista de Alunos</a>
+                </div>
+                <div class="column is-half">
+                    <a href="./aluno-create.html" class="button is-large is-fullwidth is-info">Cadastrar Aluno</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
 
 </html>
