@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+
+
 @Controller
 public class AlunoController { // Controller para gerenciar alunos
     private final List<Map<String, String>> alunos = new ArrayList<>();

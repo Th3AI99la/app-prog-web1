@@ -1,49 +1,67 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UEG - Desenvolvimento Web 2025: Alunos</title>
-    <link rel="stylesheet" href="../styles/styles.css"> <!-- Referência para o CSS externo -->
-    <link rel="stylesheet" href="../styles/bulma.css"> <!-- Referência para o Bulma CSS -->
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>UEG - Desenvolvimento Web 2025: Alunos</title>
 
-<body>
-    <div class="container">
-        <section class="section">
-            <h1 class="title has-text-centered">Lista de Alunos</h1>
-            
-            <!-- Tabela de Alunos -->
-            <table class="table is-striped is-hoverable is-fullwidth">
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Email</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="aluno, iter : ${alunos}">
-                        <td th:text="${aluno.nome}">Thalles Alves</td>
-                        <td th:text="${aluno.email}">thalles@exemplo.com</td>
-                        <td>
-                            <a th:href="@{'/alunos/editar/'+${iter.index}}" href="aluno-update.html">
-                                <button class="button is-info is-small">Editar</button>
-                            </a>
-                            <a th:href="@{'/alunos/excluir/'+${iter.index}}" href="aluno-delete.html">
-                                <button class="button is-danger is-small">Excluir</button>
-                            </a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <link rel="stylesheet" href="../static/styles/bulma.css">
+        <!-- Referência para o Bulma CSS -->
+        <link rel="stylesheet" href="../static/styles/styles.css">
+        <!-- Referência para o CSS externo -->
 
-            <div class="has-text-centered">
-                <a href="./index.html" class="button is-link">Voltar</a>
-            </div>
-        </section>
-    </div>
-</body>
+
+
+            <!-- VERIFICAR ESSE ERRO  -->
+        <link th:href="@{/static/styles/bulma.css}" rel="stylesheet">
+        <link th:href="@{/static/styles/styles.css}" rel="stylesheet">
+
+
+
+
+    </head>
+
+    <body>
+        <div class="container">
+            <section class="section">
+                <h1 class="title has-text-centered">Lista de Alunos</h1>
+
+                <!-- Tabela de Alunos -->
+                <table class="table is-striped is-hoverable is-fullwidth">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="aluno, iter : ${alunos}">
+                            <td th:text="${aluno.nome}">Thalles Alves</td>
+                            <td
+                                th:text="${aluno.email}">thalles@exemplo.com</td>
+                            <td>
+                                <a th:href="@{'/alunos/editar/'+${iter.index}}"
+                                    href="aluno-update.html">
+                                    <button type="button"
+                                        class="button is-info is-small">Editar</button>
+                                </a>
+                                <a th:href="@{'/alunos/excluir/'+${iter.index}}"
+                                    href="aluno-delete.html">
+                                    <button type="button"
+                                        class="button is-danger is-small">Excluir</button>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="has-text-centered">
+                    <a href="./index.html" class="button is-link">Voltar</a>
+                </div>
+            </section>
+        </div>
+    </body>
 
 </html>
