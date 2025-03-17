@@ -1,41 +1,42 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atualização de Aluno</title>
-        <link rel="stylesheet" href="../static/styles/bulma.css">
-        <!-- Referência para o Bulma CSS -->
-        <link rel="stylesheet" href="../static/styles/styles.css">
-        <!-- Referência para o CSS externo -->
+    <title>UEG - Atualização de Aluno</title>
+    <link rel="stylesheet" href="../static/styles/bulma.css">
+    <link rel="stylesheet" href="../static/styles/styles.css">
 </head>
 
 <body>
     <div class="container">
         <section class="section">
             <h1 class="title has-text-centered">Atualização de Aluno</h1>
-            
-            <!-- Formulário de atualização -->
-            <form action="/alunos" method="post">
+
+            <!-- Formulário com Thymeleaf -->
+            <form action="/alunos/update" method="post">
+                <!-- Campo oculto para o ID -->
+                <input type="hidden" name="id" th:value="${aluno.id}">
+
                 <div class="field">
                     <label for="nome" class="label">Nome:</label>
                     <div class="control">
-                        <input type="text" id="nome" name="nome" class="input" required>
+                        <input type="text" id="nome" name="nome" class="input" th:value="${aluno.nome}" required>
                     </div>
                 </div>
 
                 <div class="field">
                     <label for="matricula" class="label">Matrícula:</label>
                     <div class="control">
-                        <input type="text" id="matricula" name="matricula" class="input" required>
+                        <input type="text" id="matricula" name="matricula" class="input" th:value="${aluno.matricula}" required>
                     </div>
                 </div>
 
                 <div class="field">
                     <label for="email" class="label">Email:</label>
                     <div class="control">
-                        <input type="email" id="email" name="email" class="input" required>
+                        <input type="email" id="email" name="email" class="input" th:value="${aluno.email}" required>
                     </div>
                 </div>
 
