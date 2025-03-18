@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Deletar Aluno</title>
     <link rel="stylesheet" href="../static/styles/bulma.css">
-    <!-- Referência para o Bulma CSS -->
     <link rel="stylesheet" href="../static/styles/styles.css">
-    <!-- Referência para o CSS externo -->
 </head>
 
 <body>
@@ -16,38 +14,33 @@
         <section class="section">
             <h1 class="title has-text-centered">Deletar Aluno</h1>
 
-            <!-- Formulário de exclusão -->
             <form action="/alunos/delete" method="post">
-                <!-- Campo oculto para o ID do aluno -->
                 <input type="hidden" name="id" th:value="${id}">
 
-                <!-- Notificação de atenção -->
                 <div class="notification is-warning">
                     <p><strong>Atenção!</strong> Tem certeza que deseja excluir este aluno? Esta ação não pode ser desfeita.</p>
                 </div>
 
-                <!-- Campos informativos do aluno -->
                 <div class="field">
                     <label class="label">Nome:</label>
                     <div class="control">
-                        <input class="input" type="text" name="nome" th:value="${nome}" disabled>
+                        <input class="input" type="text" name="nome" th:value="${aluno['nome']}" disabled>
                     </div>
                 </div>
 
                 <div class="field">
                     <label class="label">Email:</label>
                     <div class="control">
-                        <input class="input" type="text" name="email" th:value="${email}" disabled>
+                        <input class="input" type="text" name="email" th:value="${aluno['email']}" disabled>
                     </div>
                 </div>
 
-                <!-- Botões -->
                 <div class="field is-grouped is-grouped-centered">
                     <div class="control">
                         <button type="submit" class="button is-danger">Excluir</button>
                     </div>
                     <div class="control">
-                        <a href="./alunos.html" class="button is-link">Voltar</a>
+                        <a href="/alunos" class="button is-link">Voltar</a>
                     </div>
                 </div>
             </form>

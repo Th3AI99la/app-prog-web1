@@ -77,7 +77,6 @@ public class AlunoController { // Controller para gerenciar alunos
     public String getDelete(@PathVariable int id, Model model) {
         model.addAttribute("aluno", alunos.get(id));
         model.addAttribute("id", id);
-
         return "aluno-delete";
     }
 
