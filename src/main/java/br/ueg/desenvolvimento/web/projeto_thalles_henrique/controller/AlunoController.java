@@ -60,14 +60,14 @@ public class AlunoController { // Controller para gerenciar alunos
         return "redirect:/alunos";
     }
 
-    @GetMapping("/alunos/update/{id}")
+    @GetMapping("/alunos/editar/{id}")
     public String getUpdate(@PathVariable int id, Model model) {
         model.addAttribute("aluno", alunos.get(id));
         model.addAttribute("id", id);
         return "aluno-update";
     }
 
-    @PostMapping("/alunos/update")
+    @PostMapping("/alunos/editar")
     public String postUpdate(@RequestParam int id, @RequestParam String nome, @RequestParam String email) {
         alunos.set(id, Map.of("nome", nome, "email", email));
         return "redirect:/alunos";
