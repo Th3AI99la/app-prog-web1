@@ -57,3 +57,26 @@ a:hover {
     transform: scale(1.03);
    
 }
+
+.footer_css {
+    background-color: #3a3a3a; /* Cor de fundo suave */
+    padding: 10px; /* Espaçamento interno */
+    text-align: center; /* Centraliza o texto */
+    font-size: 14px; /* Tamanho da fonte */
+    color: #ffffff; /* Cor do texto */
+    border-top: 2px solid #10d71d4d; /* Linha acima do footer */
+    margin-top: 30px; /* Espaçamento acima do footer */
+}
+
+.footer_css a {
+    color: #4A90E2; /* Cor do link */
+    text-decoration: none; /* Retira o sublinhado do link */
+}
+
+.footer_css a:hover {
+    text-decoration: underline; /* Sublinha o link ao passar o mouse */
+}
+
+.footer_css p {
+    margin: 1px 5; /* Espaçamento entre os parágrafos */
+}

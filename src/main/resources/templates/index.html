@@ -1,44 +1,92 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bem Vindo</title>
-        <link rel="stylesheet" href="../static/styles/bulma.css">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Bem Vindo</title>
+
+        <!-- Chamar interno -->
+        <link rel="stylesheet" href="styles/bulma.css">
         <!-- Referência para o Bulma CSS -->
-        <link rel="stylesheet" href="../static/styles/styles.css">
+        <link rel="stylesheet" href="styles/styles.css">
         <!-- Referência para o CSS externo -->
 
-        
+        <link rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+    </head>
+ß
+    <body>
 
-</head>
+        <!-- Navbar -->
+        <nav class="navbar is-light" role="navigation"
+            aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item">
+                    <strong>Prog-Web 1.0</strong>
+                </a>
 
-<body>
-    <section class="hero is-medium">
-        <div class="hero-body has-text-centered">
-            <h1 class="title">
-                Bem-vindo ao Curso de Desenvolvimento Web
-            </h1>
-            <p class="subtitle">
-                Transformando ideias em soluções práticas
-            </p>
-        </div>
-    </section>
+                <!-- Botão para menu mobile -->
+                <a role="button" class="navbar-burger" aria-label="menu"
+                    aria-expanded="false"
+                    data-target="navbarBasic">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
 
-    <div class="container">
-        <div class="section">
-            <h2 class="title">Opções:</h2>
-            <div class="columns">
-                <div class="column is-half">
-                    <a href="/alunos" class="button is-large is-fullwidth is-primary">Lista de Alunos</a>
-                </div>
-                <div class="column is-half">
-                    <a href="/alunos/cadastrar" class="button is-large is-fullwidth is-info">Cadastrar Aluno</a>
+            <div id="navbarBasic" class="navbar-menu">
+                <div class="navbar-start">
+                    <a href="/alunos" class="navbar-item">
+                        Lista de Alunos
+                    </a>
+                    <a href="/alunos/cadastrar" class="navbar-item">
+                        Cadastrar Aluno
+                    </a>
                 </div>
             </div>
-        </div>
-    </div>
-</body>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero is-medium">
+            <div class="hero-body has-text-centered">
+                <div class="container">
+                    <h1 class="title">
+                        Bem-vindo ao Curso de Desenvolvimento Web
+                    </h1>
+                    <p class="subtitle">
+                        Transformando ideias em soluções práticas
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer_css">
+            <div class="content has-text-centered">
+                <p>
+                    <strong>Prog-Web 1.0</strong> | 2025
+                </p>
+                <p>
+                    <a href="#" target="_blank">Visite nosso site</a>
+                </p>
+            </div>
+        </footer>
+
+        <script>
+        // Script para ativar o menu mobile
+        document.addEventListener('DOMContentLoaded', () => {
+            const burger = document.querySelector('.navbar-burger');
+            const menu = document.querySelector('#navbarBasic');
+
+            burger.addEventListener('click', () => {
+                burger.classList.toggle('is-active');
+                menu.classList.toggle('is-active');
+            });
+        });
+    </script>
+
+    </body>
 
 </html>

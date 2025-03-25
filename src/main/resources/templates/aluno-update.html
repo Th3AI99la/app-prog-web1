@@ -1,56 +1,64 @@
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UEG - Atualização de Aluno</title>
-    <link rel="stylesheet" href="../static/styles/bulma.css">
-    <link rel="stylesheet" href="../static/styles/styles.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>UEG - Atualização de Aluno</title>
+        <!-- Chamar interno -->
+        <link rel="stylesheet" href="styles/bulma.css">
+        <!-- Referência para o Bulma CSS -->
+        <link rel="stylesheet" href="styles/styles.css">
+        <!-- Referência para o CSS externo -->
 
-<body>
-    <div class="container">
-        <section class="section">
-            <h1 class="title has-text-centered">Atualização de Aluno</h1>
+    </head>
 
-            <!-- Formulário com Thymeleaf -->
-            <form action="/alunos/editar" method="post">
-                <!-- Campo oculto para o ID -->
-                <input type="hidden" name="id" th:value="${id}">
+    <body>
+        <div class="container">
+            <section class="section">
+                <h1 class="title has-text-centered">Atualização de Aluno</h1>
 
-                <div class="field">
-                    <label for="nome" class="label">Nome:</label>
-                    <div class="control">
-                        <input type="text" id="nome" name="nome" class="input" th:value="${aluno.nome}" required>
+                <!-- Formulário com Thymeleaf -->
+                <form action="/alunos/editar" method="post">
+                    <!-- Campo oculto para o ID -->
+                    <input type="hidden" name="id" th:value="${id}">
+
+                    <div class="field">
+                        <label for="nome" class="label">Nome:</label>
+                        <div class="control">
+                            <input type="text" id="nome" name="nome"
+                                class="input" th:value="${aluno.nome}" required>
+                        </div>
                     </div>
-                </div>
 
-                <div class="field">
-                    <label for="matricula" class="label">Matrícula:</label>
-                    <div class="control">
-                        
-                    </div>
-                </div>
+                    <div class="field">
+                        <label for="matricula" class="label">Matrícula:</label>
+                        <div class="control">
 
-                <div class="field">
-                    <label for="email" class="label">Email:</label>
-                    <div class="control">
-                        <input type="email" id="email" name="email" class="input" th:value="${aluno.email}" required>
+                        </div>
                     </div>
-                </div>
 
-                <div class="field is-grouped is-grouped-centered">
-                    <div class="control">
-                        <button type="submit" class="button is-primary">Salvar</button>
+                    <div class="field">
+                        <label for="email" class="label">Email:</label>
+                        <div class="control">
+                            <input type="email" id="email" name="email"
+                                class="input" th:value="${aluno.email}"
+                                required>
+                        </div>
                     </div>
-                    <div class="control">
-                        <a href="/alunos" class="button is-link">Voltar</a>
+
+                    <div class="field is-grouped is-grouped-centered">
+                        <div class="control">
+                            <button type="submit"
+                                class="button is-primary">Salvar</button>
+                        </div>
+                        <div class="control">
+                            <a href="/alunos" class="button is-link">Voltar</a>
+                        </div>
                     </div>
-                </div>
-            </form>
-        </section>
-    </div>
-</body>
+                </form>
+            </section>
+        </div>
+    </body>
 
 </html>
