@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class AlunoController { // Controller para gerenciar alunos
-
     static List alunos = new ArrayList<>();
 
     @Autowired
@@ -24,7 +23,6 @@ public class AlunoController { // Controller para gerenciar alunos
         alunos.add(Map.of("nome", "João", "email", "joao@localhost"));
         alunos.add(Map.of("nome", "Maria", "email", "maria@localhost"));
     }
-
 
     @GetMapping("/")
     public String index() {
