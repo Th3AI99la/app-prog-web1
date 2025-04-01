@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,14 +14,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class AlunoController { // Controller para gerenciar alunos
-    private final List<Map<String, String>> alunos = new ArrayList<>();
 
-    // Bloco de inicialização para adicionar alunos de exemplo
-    public AlunoController() {
+    static List alunos = new ArrayList<>();
+
+    @Autowired
+    private AlunoRepository alunoRepository;
+
+    static {
         alunos.add(Map.of("nome", "João", "email", "joao@localhost"));
         alunos.add(Map.of("nome", "Maria", "email", "maria@localhost"));
-        alunos.add(Map.of("nome", "José", "email", "jose@localhost"));
     }
+
 
     @GetMapping("/")
     public String index() {
