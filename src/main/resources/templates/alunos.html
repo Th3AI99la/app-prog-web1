@@ -1,59 +1,100 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>UEG - Desenvolvimento Web 2025: Alunos</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UEG - Desenvolvimento Web 2025: Alunos</title>
 
-        <!-- Chamar interno -->
-        <link rel="stylesheet" href="/styles/bulma.css">
-        <!-- Referência para o Bulma CSS -->
-        <link rel="stylesheet" href="/styles/styles.css">
-        <!-- Referência para o CSS externo -->
+  <!-- Bulma CSS -->
+  <link rel="stylesheet" href="/styles/bulma.css" />
+  <link rel="stylesheet" href="/styles/styles.css" />
 
-    </head>
+  <style>
+    /* Estilizações adicionais */
+    .box-shadow {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: box-shadow 0.3s ease;
+    }
 
-    <body>
-        <div class="container">
-            <section class="section">
-                <h1 class="title has-text-centered">Lista de Alunos</h1>
+    .box-shadow:hover {
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+    }
 
-                <!-- Tabela de Alunos -->
-                <table class="table is-striped is-hoverable is-fullwidth">
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Email</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="aluno, iter : ${alunos}">
-                            <td th:text="${aluno.nome}">Thalles Alves</td>
-                            <td
-                                th:text="${aluno.email}">thalles@exemplo.com</td>
-                            <td>
-                                <a th:href="@{'/alunos/editar/'+${iter.index}}"
-                                    href="aluno-update.html">
-                                    <button type="button"
-                                        class="button is-info is-small">Editar</button>
-                                </a>
-                                <a th:href="@{'/alunos/delete/'+${iter.index}}"
-                                    href="aluno-delete.html">
-                                    <button type="button"
-                                        class="button is-danger is-small">Excluir</button>
-                                </a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+    .animated-button {
+      transition: all 0.3s ease;
+    }
 
-                <div class="has-text-centered">
-                    <a href="/" class="button is-link">Voltar</a>
+    .animated-button:hover {
+      transform: translateY(-2px);
+      opacity: 0.9;
+    }
+
+    .actions-buttons {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+
+    .has-text-centered .button {
+      margin-top: 2rem;
+    }
+
+    .section {
+      padding-top: 3rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <section class="section">
+      <div class="box box-shadow">
+        <h1 class="title has-text-centered">Lista de Alunos</h1>
+
+        <!-- Formulário de Busca -->
+        <form action="/alunos/busca" method="get" class="field has-addons mb-5">
+          <div class="control is-expanded">
+            <input class="input" type="text" name="nome" placeholder="Nome do Aluno" />
+          </div>
+          <div class="control">
+            <button type="submit" class="button is-primary animated-button">Buscar</button>
+          </div>
+        </form>
+
+        <!-- Tabela de Alunos -->
+        <table class="table is-striped is-hoverable is-fullwidth">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Email</th>
+              <th class="has-text-centered">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="aluno, iter : ${alunos}">
+              <td th:text="${aluno.nome}">Thalles Alves</td>
+              <td th:text="${aluno.email}">thalles@exemplo.com</td>
+              <td>
+                <div class="actions-buttons">
+                  <a th:href="@{'/alunos/editar/'+${aluno.id}}" href="aluno-update.html">
+                    <button type="button" class="button is-info is-small animated-button">Editar</button>
+                  </a>
+                  <a th:href="@{'/alunos/delete/'+${aluno.id}}" href="aluno-delete.html">
+                    <button type="button" class="button is-danger is-small animated-button">Excluir</button>
+                  </a>
                 </div>
-            </section>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="has-text-centered">
+          <a href="/" class="button is-link animated-button">Voltar</a>
         </div>
-    </body>
+      </div>
+    </section>
+  </div>
+</body>
 
 </html>

@@ -31,7 +31,9 @@ public class AlunoController { // Controller para gerenciar alunos
 
     @GetMapping("/alunos")
     public String getHome(Model model) {
-        model.addAttribute("alunos", alunos);
+        //model.addAttribute("alunos", alunos);
+        model.addAttribute("alunos", alunoRepository.findAll());
+
         return "alunos";
     }
 
@@ -64,9 +66,10 @@ public class AlunoController { // Controller para gerenciar alunos
 
     @GetMapping("/alunos/editar/{id}")
     public String getUpdate(@PathVariable int id, Model model) {
-        model.addAttribute("aluno", alunos.get(id));
+        //model.addAttribute("aluno", alunos.get(id));
+        model.addAttribute("aluno", alunoRepository.findById(id).get());
         model.addAttribute("id", id);
-        return "aluno-update";
+        return "aluno-update.html";
     }
 
     @PostMapping("/alunos/editar")
@@ -76,10 +79,10 @@ public class AlunoController { // Controller para gerenciar alunos
     }
 
     @GetMapping("/alunos/delete/{id}")
-    public String getDelete(@PathVariable int id, Model model) {
-        model.addAttribute("aluno", alunos.get(id));
-        model.addAttribute("id", id);
-        return "aluno-delete";
+    public String getDelete(@PathVariable int id) {
+    // alunos.remove(id);
+    alunoRepository.deleteById(id);
+    return "redirect:/alunos";
     }
 
     @PostMapping("/alunos/delete")
@@ -87,5 +90,16 @@ public class AlunoController { // Controller para gerenciar alunos
         alunos.remove(id);
         return "redirect:/alunos";
     }
+
+ 
+@GetMapping("/alunos/busca")
+public String getBusca(@RequestParam("nome") String nome, Model model) {
+    // Busca alunos pelo nome (ignorando maiúsculas/minúsculas) e adiciona ao modelo
+    model.addAttribute("alunos", alunoRepository.findByNomeContainingIgnoreCase(nome));
+
+    // Retorna o nome da view (sem extensão .html se estiver usando Thymeleaf)
+    return "alunos"; // Thymeleaf resolve como alunos.html automaticamente
+}
+
 
 }
