@@ -77,7 +77,7 @@
               <td th:text="${aluno.email}">thalles@exemplo.com</td>
               <td>
                 <div class="actions-buttons">
-                  <a th:href="@{'/alunos/editar/'+${aluno.id}}" href="aluno-update.html">
+                  <a th:href="@{'/alunos/update/'+${aluno.id}}" href="aluno-update.html">
                     <button type="button" class="button is-info is-small animated-button">Editar</button>
                   </a>
                   <a th:href="@{'/alunos/delete/'+${aluno.id}}" href="aluno-delete.html">

@@ -19,7 +19,7 @@
                 <h1 class="title has-text-centered">Atualização de Aluno</h1>
 
                 <!-- Formulário com Thymeleaf -->
-                <form action="/alunos/editar" method="post">
+                <form action="/alunos/update" method="post">
                     <!-- Campo oculto para o ID -->
                     <input type="hidden" name="id" th:value="${id}">
 
@@ -31,12 +31,6 @@
                         </div>
                     </div>
 
-                    <div class="field">
-                        <label for="matricula" class="label">Matrícula:</label>
-                        <div class="control">
-
-                        </div>
-                    </div>
 
                     <div class="field">
                         <label for="email" class="label">Email:</label>

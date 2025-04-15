@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class AlunoController { // Controller para gerenciar alunos
+public class AlunoController {
+
     static List alunos = new ArrayList<>();
 
     @Autowired
@@ -24,82 +25,70 @@ public class AlunoController { // Controller para gerenciar alunos
         alunos.add(Map.of("nome", "Maria", "email", "maria@localhost"));
     }
 
-    @GetMapping("/")
-    public String index() {
-        return "index";
-    }
-
     @GetMapping("/alunos")
     public String getHome(Model model) {
-        //model.addAttribute("alunos", alunos);
-        model.addAttribute("alunos", alunoRepository.findAll());
-
-        return "alunos";
+        List alunosBd = alunoRepository.findAll();
+        model.addAttribute("alunos", alunosBd);
+        // model.addAttribute("alunos", alunos);
+        model.addAttribute("mensagem", "Todos os alunos cadastrados");
+        return "alunos.html";
     }
 
-    @GetMapping("/alunos/cadastrar")
-    public String getForm() {
-        return "aluno-create";
-    }
-
-    @PostMapping("/alunos/cadastrar")
-    public String postForm(@RequestParam String nome, @RequestParam String email) {
-        System.out.println("Nome: " + nome);
-        System.out.println("Email: " + email);
-
-        // Adiciona um novo aluno na lista
-        alunos.add(Map.of("nome", nome, "email", email));
-
-        return "redirect:/alunos";
+    @GetMapping("/")
+    public String index() {
+        return "index.html";
     }
 
     @GetMapping("/alunos/create")
     public String getCreate() {
-        return "aluno-create";
+        return "aluno-create.html";
     }
 
     @PostMapping("/alunos/create")
     public String postCreate(@RequestParam String nome, @RequestParam String email) {
-        alunos.add(Map.of("nome", nome, "email", email));
+        Aluno aluno = new Aluno(nome, email);
+        alunoRepository.save(aluno);
         return "redirect:/alunos";
     }
 
-    @GetMapping("/alunos/editar/{id}")
+    @GetMapping("/alunos/update/{id}")
     public String getUpdate(@PathVariable int id, Model model) {
-        //model.addAttribute("aluno", alunos.get(id));
+        // model.addAttribute("aluno", alunos.get(id));
         model.addAttribute("aluno", alunoRepository.findById(id).get());
         model.addAttribute("id", id);
         return "aluno-update.html";
     }
 
-    @PostMapping("/alunos/editar")
+    @PostMapping("/alunos/update")
     public String postUpdate(@RequestParam int id, @RequestParam String nome, @RequestParam String email) {
-        alunos.set(id, Map.of("nome", nome, "email", email));
+        // alunos.set(id, Map.of("nome", nome, "email", email));
+        Aluno aluno = alunoRepository.findById(id).get();
+        aluno.setNome(nome);
+        aluno.setEmail(email);
+        alunoRepository.save(aluno);
         return "redirect:/alunos";
     }
 
     @GetMapping("/alunos/delete/{id}")
-    public String getDelete(@PathVariable int id) {
-    // alunos.remove(id);
-    alunoRepository.deleteById(id);
-    return "redirect:/alunos";
+    public String getDelete(@PathVariable int id, Model model) {
+        // model.addAttribute("aluno", alunos.get(id));
+        Aluno alunodb = alunoRepository.findById(id).get();
+        model.addAttribute("aluno", alunodb);
+        model.addAttribute("id", id);
+        return "aluno-delete.html";
     }
 
     @PostMapping("/alunos/delete")
     public String postDelete(@RequestParam int id) {
-        alunos.remove(id);
+        // alunos.remove(id);
+        alunoRepository.deleteById(id);
         return "redirect:/alunos";
     }
 
- 
-@GetMapping("/alunos/busca")
-public String getBusca(@RequestParam("nome") String nome, Model model) {
-    // Busca alunos pelo nome (ignorando maiúsculas/minúsculas) e adiciona ao modelo
-    model.addAttribute("alunos", alunoRepository.findByNomeContainingIgnoreCase(nome));
-
-    // Retorna o nome da view (sem extensão .html se estiver usando Thymeleaf)
-    return "alunos"; // Thymeleaf resolve como alunos.html automaticamente
-}
-
-
+    @GetMapping("/alunos/busca")
+    public String getBusca(@RequestParam String nome, Model model) {
+        // model.addAttribute("alunos", alunos);
+        model.addAttribute("alunos", alunoRepository.findByNomeContainingIgnoreCase(nome));
+        return "alunos.html";
+    }
 }

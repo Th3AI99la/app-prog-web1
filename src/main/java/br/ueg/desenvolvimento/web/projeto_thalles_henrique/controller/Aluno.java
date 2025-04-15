@@ -9,7 +9,7 @@ import jakarta.persistence.Id;
 public class Aluno {
 
     @Id
-     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     // Atributos
@@ -21,8 +21,7 @@ public class Aluno {
 
     }
 
-    public Aluno(Integer id, String nome, String email) {
-        this.id = id;
+    public Aluno(String nome, String email) {
         this.nome = nome;
         this.email = email;
     }
