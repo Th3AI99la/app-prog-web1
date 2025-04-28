@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telones</title>
+</head>
+<body>
+
+<form action="/alunos/update/telefone" method="post">
+                <div class="input-field col m6 s12">
+                    <input type="hidden" name="id" th:value="${id}">
+                    <label>Nome: </label>
+                    <input type="text" name="nome" th:value="${aluno.nome}" disabled>
+                </div>
+
+                <div class="col m6 s12">
+                    <label>Telefones</label>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th scope="col">Telefone</th>
+                            <th scope="col">Ação</th>
+                        </tr>
+                        <tr th:each="telefone : ${aluno.telefones}">
+                            <td th:text="${telefone.numero}"></td>
+                            <td>
+                                <a class="waves-effect waves-light btn-small red"
+                                    th:href="@{'/alunos/delete/telefone/'+ ${aluno.id} + '/' + ${telefone.id}}">-</a>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" name="novoTelefone" placeholder="Novo telefone">
+                            </td>
+                            <td>
+                                <button type="submit" class="waves-effect waves-light btn-small">+</button>
+                            </td>
+                    </table>
+                </div>
+            </form>
+    
+</body>
+</html>

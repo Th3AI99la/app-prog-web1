@@ -51,21 +51,46 @@ public class AlunoController {
         return "redirect:/alunos";
     }
 
-    @GetMapping("/alunos/update/{id}")
-    public String getUpdate(@PathVariable int id, Model model) {
-        // model.addAttribute("aluno", alunos.get(id));
-        model.addAttribute("aluno", alunoRepository.findById(id).get());
-        model.addAttribute("id", id);
-        return "aluno-update.html";
+    @Autowired
+    DisciplinaRepository disciplinaRepository;
+
+    @GetMapping("/aluno/update/{id}")
+    public String updateAluno(@PathVariable Integer id, Model model) {
+        Aluno aluno = alunoRepository.findById(id).orElse(null);
+        List<Disciplina> todasDisciplinas = disciplinaRepository.findAll();
+        model.addAttribute("aluno"
+
+                , aluno);
+        model.addAttribute("todasDisciplinas"
+
+                , todasDisciplinas);
+
+        return "aluno-update";
     }
 
     @PostMapping("/alunos/update")
-    public String postUpdate(@RequestParam int id, @RequestParam String nome, @RequestParam String email) {
-        // alunos.set(id, Map.of("nome", nome, "email", email));
+    public String postUpdate(
+            @RequestParam int id,
+            @RequestParam String nome,
+            @RequestParam String email,
+            @RequestParam List<Integer> disciplinas) {
+        // Buscar aluno pelo ID
         Aluno aluno = alunoRepository.findById(id).get();
         aluno.setNome(nome);
         aluno.setEmail(email);
+
+        // Buscar disciplinas selecionadas
+        List<Disciplina> disciplinasSelecionadas = new ArrayList<>();
+        for (Integer idDisciplina : disciplinas) {
+            Disciplina disciplina = disciplinaRepository.findById(idDisciplina).get();
+            disciplinasSelecionadas.add(disciplina);
+        }
+
+        aluno.setDisciplinas(disciplinasSelecionadas);
+
+        // Salvar atualizações
         alunoRepository.save(aluno);
+
         return "redirect:/alunos";
     }
 

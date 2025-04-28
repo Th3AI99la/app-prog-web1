@@ -31,7 +31,6 @@
                         </div>
                     </div>
 
-
                     <div class="field">
                         <label for="email" class="label">Email:</label>
                         <div class="control">
@@ -49,6 +48,18 @@
                         <div class="control">
                             <a href="/alunos" class="button is-link">Voltar</a>
                         </div>
+                    </div>
+
+                    <div class="input-field col m6 s12">
+                        <select id="disciplinas" name="disciplinas"
+                            th:field="*{aluno.disciplinas}" multiple
+                            class="browser-default">
+                            <option th:each="disciplina : ${todasDisciplinas}"
+                                th:value="${{disciplina}}"
+                                th:text="${disciplina.nome}">
+                                Portugues
+                            </option>
+                        </select>
                     </div>
                 </form>
             </section>
