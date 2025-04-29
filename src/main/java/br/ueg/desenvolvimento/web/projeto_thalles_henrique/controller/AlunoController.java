@@ -2,7 +2,6 @@ package br.ueg.desenvolvimento.web.projeto_thalles_henrique.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,15 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class AlunoController {
 
-    static List alunos = new ArrayList<>();
 
     @Autowired
     private AlunoRepository alunoRepository;
 
-    static {
-        alunos.add(Map.of("nome", "João", "email", "joao@localhost"));
-        alunos.add(Map.of("nome", "Maria", "email", "maria@localhost"));
-    }
 
     @GetMapping("/alunos")
     public String getHome(Model model) {
@@ -58,14 +52,10 @@ public class AlunoController {
     public String updateAluno(@PathVariable Integer id, Model model) {
         Aluno aluno = alunoRepository.findById(id).orElse(null);
         List<Disciplina> todasDisciplinas = disciplinaRepository.findAll();
-        model.addAttribute("aluno"
+        model.addAttribute("aluno", aluno);
+        model.addAttribute("todasDisciplinas", todasDisciplinas);
 
-                , aluno);
-        model.addAttribute("todasDisciplinas"
-
-                , todasDisciplinas);
-
-        return "aluno-update";
+        return "aluno-update.html";
     }
 
     @PostMapping("/alunos/update")
@@ -94,6 +84,13 @@ public class AlunoController {
         return "redirect:/alunos";
     }
 
+    @GetMapping("/alunos/update/telefone/{id}")
+    public String updateTelefone(@PathVariable Integer id, Model model) {
+        Aluno aluno = alunoRepository.findById(id).orElse(null);
+        model.addAttribute("aluno", aluno);
+        return "aluno-telefone";
+    }
+
     @GetMapping("/alunos/delete/{id}")
     public String getDelete(@PathVariable int id, Model model) {
         // model.addAttribute("aluno", alunos.get(id));
@@ -101,6 +98,29 @@ public class AlunoController {
         model.addAttribute("aluno", alunodb);
         model.addAttribute("id", id);
         return "aluno-delete.html";
+    }
+
+    @PostMapping("/alunos/update/telefone")
+    public String postUpdateTelefone(@RequestParam int id,
+
+        @RequestParam String novoTelefone) {
+        TelefoneAluno telefone = new TelefoneAluno();
+        telefone.setNumero(novoTelefone);
+        Aluno aluno = alunoRepository.findById(id).get();
+        telefone.setAluno(aluno);
+        aluno.getTelefones().add(telefone);
+        alunoRepository.save(aluno);
+        return "redirect:/alunos/update/telefone/" + id;
+    }
+
+    @Autowired
+    private TelefoneAlunoRepository telefoneAlunoRepository;
+
+    @GetMapping("/alunos/delete/telefone/{id}/{idTelefone}")
+    public String deleteTelefone(@PathVariable int id,
+            @PathVariable int idTelefone) {
+        telefoneAlunoRepository.deleteById(idTelefone);
+        return "redirect:/alunos/update/telefone/" + id;
     }
 
     @PostMapping("/alunos/delete")

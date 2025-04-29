@@ -1,10 +1,13 @@
 package br.ueg.desenvolvimento.web.projeto_thalles_henrique.controller;
 
 import jakarta.persistence.Basic;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
+@Entity
 public class TelefoneAluno {
 
     @Id
