@@ -3,7 +3,6 @@ package br.ueg.desenvolvimento.web.projeto_thalles_henrique.controller;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
@@ -11,7 +10,7 @@ import jakarta.persistence.ManyToOne;
 public class TelefoneAluno {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Integer id;
 
     @Basic
@@ -20,10 +19,8 @@ public class TelefoneAluno {
     @Basic
     private Boolean whatsapp;
 
-    @ManyToOne // MUITOS TELEFONES PARA UM ALUNO
-    private Aluno aluno; // Relacionamento com Aluno 
-
-    // Construtores
+    @ManyToOne
+    private Aluno aluno;
 
     public Integer getId() {
         return id;
@@ -57,5 +54,5 @@ public class TelefoneAluno {
         this.aluno = aluno;
     }
 
-
+    
 }

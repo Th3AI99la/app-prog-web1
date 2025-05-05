@@ -13,26 +13,35 @@ import jakarta.persistence.OneToMany;
 public class Aluno {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
-    // Atributos
     private String nome;
     private String email;
 
-    // Relacionamentos
     @OneToMany(mappedBy = "aluno")
     private List<TelefoneAluno> telefones;
 
     @ManyToMany
     private List<Disciplina> disciplinas;
 
-    // Construtores
     public Aluno() {
 
     }
 
-    // Getters e Setters - Disciplina
+    public Aluno(String nome, String email) {
+        this.nome = nome;
+        this.email = email;
+    }
+
+    public List<TelefoneAluno> getTelefones() {
+        return telefones;
+    }
+
+    public void setTelefones(List<TelefoneAluno> telefones) {
+        this.telefones = telefones;
+    }
+
     public List<Disciplina> getDisciplinas() {
         return disciplinas;
     }
@@ -41,14 +50,6 @@ public class Aluno {
         this.disciplinas = disciplinas;
     }
 
-    // Getters e Setters - Aluno
-
-    public Aluno(String nome, String email) {
-        this.nome = nome;
-        this.email = email;
-    }
-
-    // Getters e Setters - ID
     public Integer getId() {
         return id;
     }
@@ -57,7 +58,6 @@ public class Aluno {
         this.id = id;
     }
 
-    // Getters e Setters - Nome e Email
     public String getNome() {
         return nome;
     }
@@ -73,13 +73,4 @@ public class Aluno {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public List<TelefoneAluno> getTelefones() {
-        return telefones;
-    }
-
-    public void setTelefones(List<TelefoneAluno> telefones) {
-        this.telefones = telefones;
-    }
-
 }
