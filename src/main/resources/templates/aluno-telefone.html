@@ -5,48 +5,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UEG - Telefones do Aluno</title>
-    <!-- Chamar interno -->
     <link rel="stylesheet" href="/styles/bulma.css">
-    <!-- Referência para o Bulma CSS -->
     <link rel="stylesheet" href="/styles/styles.css">
-    <!-- Referência para o CSS externo -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
     <div class="container">
         <section class="section">
-            <h1 class="title has-text-centered">Gerenciar Telefones</h1>
+            <h1 class="title is-4 has-text-weight-semibold has-text-centered">Gerenciar Telefones</h1>
 
             <form action="/alunos/update/telefone" method="post">
-                <!-- Campo oculto para o ID -->
                 <input type="hidden" name="id" th:value="${id}">
 
-                <!-- Campo Nome -->
+                <!-- Nome do Aluno -->
                 <div class="field">
-                    <label for="nome" class="label">Nome:</label>
-                    <div class="control">
-                        <input type="text" id="nome" name="nome" class="input" th:value="${aluno.nome}" disabled>
+                    <label for="nome" class="label">Nome</label>
+                    <div class="control has-icons-left">
+                        <input type="text" id="nome" name="nome" class="input is-static" th:value="${aluno.nome}" disabled>
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-user"></i>
+                        </span>
                     </div>
                 </div>
 
-                <!-- Tabela de Telefones -->
-                <div class="field">
-                    <label class="label">Telefones:</label>
+                <!-- Telefones -->
+                <div class="field mt-5">
+                    <label class="label">Telefones</label>
                     <div class="table-container">
-                        <table class="table is-fullwidth is-bordered is-striped">
+                        <table class="table is-fullwidth is-hoverable">
                             <thead>
                                 <tr>
-                                    <th>Telefone</th>
-                                    <th>Ação</th>
+                                    <th>Número</th>
+                                    <th style="width: 100px;">Ação</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr th:each="telefone : ${aluno.telefones}">
                                     <td th:text="${telefone.numero}"></td>
                                     <td>
-                                        <a class="button is-small is-danger"
+                                        <a class="button is-small is-light has-text-danger"
                                            th:href="@{'/alunos/delete/telefone/' + ${aluno.id} + '/' + ${telefone.id}}">
-                                            Remover
+                                            <span class="icon">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </span>
                                         </a>
                                     </td>
                                 </tr>
@@ -55,7 +57,11 @@
                                         <input type="text" name="novoTelefone" class="input" placeholder="Novo telefone">
                                     </td>
                                     <td>
-                                        <button type="submit" class="button is-small is-primary">Adicionar</button>
+                                        <button type="submit" class="button is-small is-dark">
+                                            <span class="icon">
+                                                <i class="fas fa-plus"></i>
+                                            </span>
+                                        </button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -64,9 +70,14 @@
                 </div>
 
                 <!-- Botão Voltar -->
-                <div class="field is-grouped is-grouped-centered">
+                <div class="field is-grouped is-grouped-centered mt-4">
                     <div class="control">
-                        <a href="/alunos" class="button is-link">Voltar</a>
+                        <a href="/alunos" class="button is-light">
+                            <span class="icon">
+                                <i class="fas fa-arrow-left"></i>
+                            </span>
+                            <span>Voltar</span>
+                        </a>
                     </div>
                 </div>
             </form>

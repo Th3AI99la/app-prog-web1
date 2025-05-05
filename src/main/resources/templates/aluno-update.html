@@ -9,7 +9,10 @@
         <link rel="stylesheet" href="/styles/bulma.css">
         <!-- Referência para o Bulma CSS -->
         <link rel="stylesheet" href="/styles/styles.css">
+
         <!-- Referência para o CSS externo -->
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     </head>
 
@@ -23,45 +26,64 @@
                     <!-- Campo oculto para o ID -->
                     <input type="hidden" name="id" th:value="${id}">
 
+                    <!-- Campo Nome -->
                     <div class="field">
-                        <label for="nome" class="label">Nome:</label>
-                        <div class="control">
-                            <input type="text" id="nome" name="nome"
-                                class="input" th:value="${aluno.nome}" required>
+                        <label for="nome" class="label">Nome</label>
+                        <div class="control has-icons-left">
+                            <input class="input" type="text" id="nome"
+                                name="nome"
+                                th:value="${aluno.nome}"
+                                placeholder="Digite o nome" required>
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-user"></i>
+                            </span>
                         </div>
                     </div>
 
+                    <!-- Campo Email -->
                     <div class="field">
-                        <label for="email" class="label">Email:</label>
-                        <div class="control">
-                            <input type="email" id="email" name="email"
-                                class="input" th:value="${aluno.email}"
-                                required>
+                        <label for="email" class="label">Email</label>
+                        <div class="control has-icons-left">
+                            <input class="input" type="email" id="email"
+                                name="email"
+                                th:value="${aluno.email}"
+                                placeholder="Digite o email" required>
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-envelope"></i>
+                            </span>
                         </div>
                     </div>
 
-                    <div class="field is-grouped is-grouped-centered">
+                    <!-- Campo Disciplinas -->
+                    <div class="field">
+                        <label class="label">Disciplinas</label>
+                        <div class="control">
+                            <div class="select is-multiple is-rounded is-info">
+                                <select id="disciplinas" name="disciplinas"
+                                    th:field="*{aluno.disciplinas}">
+                                    <option
+                                        th:each="disciplina : ${todasDisciplinas}"
+                                        th:value="${{disciplina}}"
+                                        th:text="${disciplina.nome}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botões -->
+                    <div class="field is-grouped">
                         <div class="control">
                             <button type="submit"
                                 class="button is-primary">Salvar</button>
                         </div>
                         <div class="control">
-                            <a href="/alunos" class="button is-link">Voltar</a>
+                            <a href="/alunos"
+                                class="button is-link is-light">Voltar</a>
                         </div>
                     </div>
-
-                    <div class="input-field col m6 s12">
-                        <select id="disciplinas" name="disciplinas"
-                            th:field="*{aluno.disciplinas}" multiple
-                            class="browser-default">
-                            <option th:each="disciplina : ${todasDisciplinas}"
-                                th:value="${{disciplina}}"
-                                th:text="${disciplina.nome}">
-                                Portugues
-                            </option>
-                        </select>
-                    </div>
                 </form>
+
             </section>
         </div>
     </body>

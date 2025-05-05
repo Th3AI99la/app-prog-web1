@@ -12,9 +12,11 @@
         <link rel="stylesheet" href="/styles/styles.css">
         <!-- Referência para o CSS externo -->
 
-        <link
-            rel="stylesheet"
+        <link rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     </head>
 
@@ -26,32 +28,49 @@
                 <!-- Formulário de cadastro -->
                 <form action="/alunos/create" method="post">
                     <div class="field">
-                        <label class="label" for="nome">Nome:</label>
-                        <div class="control">
+                        <label class="label" for="nome">Nome</label>
+                        <div class="control has-icons-left">
                             <input class="input" type="text" id="nome"
-                                name="nome" required>
+                                name="nome" placeholder="Digite o nome"
+                                required>
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-user"></i>
+                            </span>
                         </div>
                     </div>
 
                     <div class="field">
-                        <label class="label" for="email">Email:</label>
-                        <div class="control">
+                        <label class="label" for="email">Email</label>
+                        <div class="control has-icons-left">
                             <input class="input" type="email" id="email"
-                                name="email" required>
+                                name="email" placeholder="Digite o email"
+                                required>
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-envelope"></i>
+                            </span>
                         </div>
                     </div>
 
-                    <div class="field is-grouped is-grouped-centered">
+                    <div class="field is-grouped is-grouped-centered mt-5">
                         <div class="control">
-                            <button type="submit"
-                                class="button is-primary">Salvar</button>
+                            <button type="submit" class="button is-primary">
+                                <span class="icon">
+                                    <i class="fas fa-check"></i>
+                                </span>
+                                <span>Salvar</span>
+                            </button>
                         </div>
                         <div class="control">
-                            <a href="/"
-                                class="button is-link">Voltar</a>
+                            <a href="/" class="button is-link is-light">
+                                <span class="icon">
+                                    <i class="fas fa-arrow-left"></i>
+                                </span>
+                                <span>Voltar</span>
+                            </a>
                         </div>
                     </div>
                 </form>
+
             </section>
         </div>
     </body>
