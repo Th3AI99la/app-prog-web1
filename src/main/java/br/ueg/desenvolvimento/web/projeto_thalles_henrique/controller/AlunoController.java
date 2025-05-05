@@ -2,6 +2,7 @@ package br.ueg.desenvolvimento.web.projeto_thalles_henrique.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,26 +12,30 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+
 @Controller
 public class AlunoController {
-
 
     @Autowired
     private AlunoRepository alunoRepository;
 
+    @Autowired
+    private DisciplinaRepository disciplinaRepository;
 
-    @GetMapping("/alunos")
-    public String getHome(Model model) {
-        List alunosBd = alunoRepository.findAll();
-        model.addAttribute("alunos", alunosBd);
-        // model.addAttribute("alunos", alunos);
-        model.addAttribute("mensagem", "Todos os alunos cadastrados");
-        return "alunos.html";
-    }
+    @Autowired
+    private TelefoneAlunoRepository telefoneAlunoRepository;
 
     @GetMapping("/")
     public String index() {
         return "index.html";
+    }
+
+    @GetMapping("/alunos")
+    public String getHome(Model model) {
+        List<Aluno> alunosBd = alunoRepository.findAll();
+        model.addAttribute("alunos", alunosBd);
+        model.addAttribute("mensagem", "Todos os alunos cadastrados");
+        return "alunos.html";
     }
 
     @GetMapping("/alunos/create")
@@ -45,17 +50,18 @@ public class AlunoController {
         return "redirect:/alunos";
     }
 
-    @Autowired
-    DisciplinaRepository disciplinaRepository;
-
-    @GetMapping("/aluno/update/{id}")
-    public String updateAluno(@PathVariable Integer id, Model model) {
-        Aluno aluno = alunoRepository.findById(id).orElse(null);
-        List<Disciplina> todasDisciplinas = disciplinaRepository.findAll();
-        model.addAttribute("aluno", aluno);
-        model.addAttribute("todasDisciplinas", todasDisciplinas);
-
-        return "aluno-update.html";
+    @GetMapping("/alunos/update/{id}")
+    public String getUpdate(@PathVariable int id, Model model) {
+        Optional<Aluno> optionalAluno = alunoRepository.findById(id);
+        if (optionalAluno.isPresent()) {
+            Aluno aluno = optionalAluno.get();
+            model.addAttribute("aluno", aluno);
+            model.addAttribute("id", id);
+            model.addAttribute("todasDisciplinas", disciplinaRepository.findAll());
+            return "aluno-update.html";
+        } else {
+            return "redirect:/alunos";
+        }
     }
 
     @PostMapping("/alunos/update")
@@ -64,75 +70,73 @@ public class AlunoController {
             @RequestParam String nome,
             @RequestParam String email,
             @RequestParam List<Integer> disciplinas) {
-        // Buscar aluno pelo ID
-        Aluno aluno = alunoRepository.findById(id).get();
-        aluno.setNome(nome);
-        aluno.setEmail(email);
+        Optional<Aluno> optionalAluno = alunoRepository.findById(id);
+        if (optionalAluno.isPresent()) {
+            Aluno aluno = optionalAluno.get();
+            aluno.setNome(nome);
+            aluno.setEmail(email);
 
-        // Buscar disciplinas selecionadas
-        List<Disciplina> disciplinasSelecionadas = new ArrayList<>();
-        for (Integer idDisciplina : disciplinas) {
-            Disciplina disciplina = disciplinaRepository.findById(idDisciplina).get();
-            disciplinasSelecionadas.add(disciplina);
+            List<Disciplina> disciplinasBd = new ArrayList<>();
+            for (Integer discId : disciplinas) {
+                disciplinaRepository.findById(discId).ifPresent(disciplinasBd::add);
+            }
+
+            aluno.setDisciplinas(disciplinasBd);
+            alunoRepository.save(aluno);
         }
-
-        aluno.setDisciplinas(disciplinasSelecionadas);
-
-        // Salvar atualizações
-        alunoRepository.save(aluno);
-
         return "redirect:/alunos";
     }
 
     @GetMapping("/alunos/update/telefone/{id}")
     public String updateTelefone(@PathVariable Integer id, Model model) {
-        Aluno aluno = alunoRepository.findById(id).orElse(null);
-        model.addAttribute("aluno", aluno);
-        return "aluno-telefone";
-    }
-
-    @GetMapping("/alunos/delete/{id}")
-    public String getDelete(@PathVariable int id, Model model) {
-        // model.addAttribute("aluno", alunos.get(id));
-        Aluno alunodb = alunoRepository.findById(id).get();
-        model.addAttribute("aluno", alunodb);
-        model.addAttribute("id", id);
-        return "aluno-delete.html";
+        Optional<Aluno> optionalAluno = alunoRepository.findById(id);
+        if (optionalAluno.isPresent()) {
+            model.addAttribute("aluno", optionalAluno.get());
+            return "aluno-telefone";
+        } else {
+            return "redirect:/alunos";
+        }
     }
 
     @PostMapping("/alunos/update/telefone")
-    public String postUpdateTelefone(@RequestParam int id,
-
-        @RequestParam String novoTelefone) {
-        TelefoneAluno telefone = new TelefoneAluno();
-        telefone.setNumero(novoTelefone);
-        Aluno aluno = alunoRepository.findById(id).get();
-        telefone.setAluno(aluno);
-        aluno.getTelefones().add(telefone);
-        alunoRepository.save(aluno);
+    public String postUpdateTelefone(@RequestParam int id, @RequestParam String novoTelefone) {
+        Optional<Aluno> optionalAluno = alunoRepository.findById(id);
+        if (optionalAluno.isPresent()) {
+            Aluno aluno = optionalAluno.get();
+            TelefoneAluno telefone = new TelefoneAluno();
+            telefone.setNumero(novoTelefone);
+            telefone.setAluno(aluno);
+            telefoneAlunoRepository.save(telefone);
+        }
         return "redirect:/alunos/update/telefone/" + id;
     }
 
-    @Autowired
-    private TelefoneAlunoRepository telefoneAlunoRepository;
-
     @GetMapping("/alunos/delete/telefone/{id}/{idTelefone}")
-    public String deleteTelefone(@PathVariable int id,
-            @PathVariable int idTelefone) {
+    public String deleteTelefone(@PathVariable int id, @PathVariable int idTelefone) {
         telefoneAlunoRepository.deleteById(idTelefone);
         return "redirect:/alunos/update/telefone/" + id;
     }
 
+    @GetMapping("/alunos/delete/{id}")
+    public String getDelete(@PathVariable int id, Model model) {
+        Optional<Aluno> optionalAluno = alunoRepository.findById(id);
+        if (optionalAluno.isPresent()) {
+            model.addAttribute("aluno", optionalAluno.get());
+            model.addAttribute("id", id);
+            return "aluno-delete.html";
+        } else {
+            return "redirect:/alunos";
+        }
+    }
+
     @PostMapping("/alunos/delete")
     public String postDelete(@RequestParam int id) {
-        // alunos.remove(id);
         alunoRepository.deleteById(id);
         return "redirect:/alunos";
     }
 
     @GetMapping("/alunos/busca")
     public String getBusca(@RequestParam String nome, Model model) {
-        // model.addAttribute("alunos", alunos);
         model.addAttribute("alunos", alunoRepository.findByNomeContainingIgnoreCase(nome));
         return "alunos.html";
     }

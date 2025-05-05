@@ -3,14 +3,13 @@ package br.ueg.desenvolvimento.web.projeto_thalles_henrique.controller;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class Disciplina {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Integer id;
 
     @Basic
@@ -18,8 +17,6 @@ public class Disciplina {
 
     @Basic
     private String curso;
-
-    // Construtores
 
     public Integer getId() {
         return id;
@@ -45,4 +42,6 @@ public class Disciplina {
         this.curso = curso;
     }
 
+    
 }
+
