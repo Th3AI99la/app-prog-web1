@@ -1,44 +1,77 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Telones</title>
+    <title>UEG - Telefones do Aluno</title>
+    <!-- Chamar interno -->
+    <link rel="stylesheet" href="/styles/bulma.css">
+    <!-- Referência para o Bulma CSS -->
+    <link rel="stylesheet" href="/styles/styles.css">
+    <!-- Referência para o CSS externo -->
 </head>
-<body>
 
-<form action="/alunos/update/telefone" method="post">
-                <div class="input-field col m6 s12">
-                    <input type="hidden" name="id" th:value="${id}">
-                    <label>Nome: </label>
-                    <input type="text" name="nome" th:value="${aluno.nome}" disabled>
+<body>
+    <div class="container">
+        <section class="section">
+            <h1 class="title has-text-centered">Gerenciar Telefones</h1>
+
+            <form action="/alunos/update/telefone" method="post">
+                <!-- Campo oculto para o ID -->
+                <input type="hidden" name="id" th:value="${id}">
+
+                <!-- Campo Nome -->
+                <div class="field">
+                    <label for="nome" class="label">Nome:</label>
+                    <div class="control">
+                        <input type="text" id="nome" name="nome" class="input" th:value="${aluno.nome}" disabled>
+                    </div>
                 </div>
 
-                <div class="col m6 s12">
-                    <label>Telefones</label>
-                    <table class="table table-bordered">
-                        <tr>
-                            <th scope="col">Telefone</th>
-                            <th scope="col">Ação</th>
-                        </tr>
-                        <tr th:each="telefone : ${aluno.telefones}">
-                            <td th:text="${telefone.numero}"></td>
-                            <td>
-                                <a class="waves-effect waves-light btn-small red"
-                                    th:href="@{'/alunos/delete/telefone/'+ ${aluno.id} + '/' + ${telefone.id}}">-</a>
+                <!-- Tabela de Telefones -->
+                <div class="field">
+                    <label class="label">Telefones:</label>
+                    <div class="table-container">
+                        <table class="table is-fullwidth is-bordered is-striped">
+                            <thead>
+                                <tr>
+                                    <th>Telefone</th>
+                                    <th>Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="telefone : ${aluno.telefones}">
+                                    <td th:text="${telefone.numero}"></td>
+                                    <td>
+                                        <a class="button is-small is-danger"
+                                           th:href="@{'/alunos/delete/telefone/' + ${aluno.id} + '/' + ${telefone.id}}">
+                                            Remover
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="text" name="novoTelefone" class="input" placeholder="Novo telefone">
+                                    </td>
+                                    <td>
+                                        <button type="submit" class="button is-small is-primary">Adicionar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="text" name="novoTelefone" placeholder="Novo telefone">
-                            </td>
-                            <td>
-                                <button type="submit" class="waves-effect waves-light btn-small">+</button>
-                            </td>
-                    </table>
+                <!-- Botão Voltar -->
+                <div class="field is-grouped is-grouped-centered">
+                    <div class="control">
+                        <a href="/alunos" class="button is-link">Voltar</a>
+                    </div>
                 </div>
             </form>
-    
+        </section>
+    </div>
 </body>
+
 </html>

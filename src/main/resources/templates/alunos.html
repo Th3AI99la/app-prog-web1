@@ -78,19 +78,17 @@
               <tr th:each="aluno, iter : ${alunos}">
                 <td th:text="${aluno.nome}">Thalles Alves</td>
                 <td th:text="${aluno.email}">thalles@exemplo.com</td>
-                <td>
-                  <li>
-                    <a class="waves-effect waves-light btn-small"
-                      th:href="@{'/alunos/update/telefone/' + ${aluno.id}}">Telefones</a>
-                  </li>
-                  <div class="actions-buttons">
-                    <a th:href="@{'/alunos/update/'+${aluno.id}}"
-                      href="aluno-update.html">
+                <td class="has-text-centered">
+                  <div class="buttons is-centered is-inline-flex">
+                    <a th:href="@{'/alunos/update/telefone/' + ${aluno.id}}">
+                      <button type="button"
+                        class="button is-link is-light is-small animated-button">Telefones</button>
+                    </a>
+                    <a th:href="@{'/alunos/update/'+${aluno.id}}">
                       <button type="button"
                         class="button is-info is-small animated-button">Editar</button>
                     </a>
-                    <a th:href="@{'/alunos/delete/'+${aluno.id}}"
-                      href="aluno-delete.html">
+                    <a th:href="@{'/alunos/delete/'+${aluno.id}}">
                       <button type="button"
                         class="button is-danger is-small animated-button">Excluir</button>
                     </a>
